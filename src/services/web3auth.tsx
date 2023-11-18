@@ -225,6 +225,8 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
     }
     const user = await web3Auth.getUserInfo();
     uiConsole(user);
+
+    return user;
   };
 
   const addChain = async () => {

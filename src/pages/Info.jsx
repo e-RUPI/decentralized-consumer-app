@@ -3,43 +3,43 @@ import { useWeb3Auth } from "../services/web3auth";
 import styles from "../styles/Home.module.css";
 
 const Info = () => {
-    const {
-        provider,
-        login,
-        logout,
-        getUserInfo,
-        getAccounts,
-        getBalance,
-        signMessage,
-        signTransaction,
-        signAndSendTransaction,
-        web3Auth,
-        chain,
-        addChain,
-        switchChain,
-        getTokenBalance,
-        signAndSendTokenTransaction,
-        randomContractInteraction,
-    } = useWeb3Auth();
+  const {
+    provider,
+    login,
+    logout,
+    getUserInfo,
+    getAccounts,
+    getBalance,
+    signMessage,
+    signTransaction,
+    signAndSendTransaction,
+    web3Auth,
+    chain,
+    addChain,
+    switchChain,
+    getTokenBalance,
+    signAndSendTokenTransaction,
+    randomContractInteraction,
+  } = useWeb3Auth();
 
-    const loggedInView = (
-        <>
-            <button onClick={getUserInfo} className={styles.card}>
-                Get User Info
-            </button>
-            <button onClick={getAccounts} className={styles.card}>
-                Get Accounts
-            </button>
-            <button onClick={getBalance} className={styles.card}>
-                Get Balance
-            </button>
-            {/* <button onClick={getTokenBalance} className={styles.card}>
+  const loggedInView = (
+    <>
+      <button onClick={getUserInfo} className={styles.card}>
+        Get User Info
+      </button>
+      <button onClick={getAccounts} className={styles.card}>
+        Get Accounts
+      </button>
+      <button onClick={getBalance} className={styles.card}>
+        Get Balance
+      </button>
+      {/* <button onClick={getTokenBalance} className={styles.card}>
                 Get Token Balance
             </button> */}
-            <button onClick={signMessage} className={styles.card}>
-                Sign Message
-            </button>
-            {/* <button onClick={addChain} className={styles.card}>
+      <button onClick={signMessage} className={styles.card}>
+        Sign Message
+      </button>
+      {/* <button onClick={addChain} className={styles.card}>
                 Add Chain
             </button>
             <button onClick={switchChain} className={styles.card}>
@@ -59,23 +59,27 @@ const Info = () => {
             <button onClick={randomContractInteraction} className={styles.card}>
                 Contract Interaction
             </button> */}
-            <button onClick={logout} className={styles.card}>
-                Log Out
-            </button>
+      <button onClick={logout} className={styles.card}>
+        Log Out
+      </button>
 
-            <div className={styles.console} id="console">
-                <p className={styles.code}></p>
-            </div>
-        </>
-    );
+      <div className={styles.console} id="console">
+        <p className={styles.code}></p>
+      </div>
+    </>
+  );
 
-    const unloggedInView = (
-        <button onClick={login} className={styles.card}>
-            Login
-        </button>
-    );
+  const unloggedInView = (
+    <button onClick={login} className={styles.card}>
+      Login
+    </button>
+  );
 
-    return <div className={styles.grid}>{provider ? loggedInView : unloggedInView}</div>;
+  return (
+    <div className={styles.grid}>
+      {provider ? loggedInView : unloggedInView}
+    </div>
+  );
 };
 
 export default Info;
