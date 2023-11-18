@@ -1,10 +1,9 @@
-import Navbar from "../components/Navbar";
 import { useWeb3Auth } from "../services/web3auth";
-import { useState, useEffect } from "react";
-import { Button, Grid, Typography } from "@mui/material";
+import { useState } from "react";
+import { Grid, Typography } from "@mui/material";
 
 const Home = () => {
-  const { provider, getUserInfo } = useWeb3Auth();
+  const { getUserInfo } = useWeb3Auth();
   const [userInfo, setUserInfo] = useState(null);
 
   const fetchData = async () => {

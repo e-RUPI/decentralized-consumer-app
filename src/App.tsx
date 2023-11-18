@@ -1,8 +1,7 @@
 import React from "react";
-import { useState } from "react";
 import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
-import Info from "./pages/Info";
+// import Info from "./pages/Info";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 
@@ -18,7 +17,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/info" element={<Info />} />
+          {/* <Route path="/info" element={<Info />} /> */}
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </Web3AuthProvider>

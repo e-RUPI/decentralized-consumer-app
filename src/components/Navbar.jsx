@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { ButtonGroup, Grid, Button, Typography } from "@mui/material";
+import { ButtonGroup, Grid, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useWeb3Auth } from "../services/web3auth";
 

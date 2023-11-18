@@ -1,7 +1,6 @@
-import Navbar from "../components/Navbar";
 import { useWeb3Auth } from "../services/web3auth";
 import { useState, useEffect } from "react";
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const Profile = () => {
   const { provider, getUserInfo } = useWeb3Auth();
