@@ -36,6 +36,7 @@ export default function Appbar() {
   const handleLogout = async () => {
     logout();
     setUserInfo(null);
+    window.location.reload();
   };
 
   return (
