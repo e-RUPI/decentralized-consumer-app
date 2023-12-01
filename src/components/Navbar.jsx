@@ -1,38 +1,52 @@
 import React, { useState, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import { ButtonGroup, Grid, Button } from "@mui/material";
+import { AppBar, Toolbar, Button, ButtonGroup, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useWeb3Auth } from "../services/web3auth";
+import logo from "../Assets/logo.png";
 
-const btn = {
-  marginRight: "20px",
-  color: "black",
-  backgroundColor: "transparent",
-  height: "40px",
-  width: "auto",
-  "&:hover": {
-    backgroundColor: "#F9A826",
-    color: "black",
+const styles = {
+  appBar: {
+    backgroundColor: "transparent",
+    height: "180px",
+    boxShadow: "none",
+  },
+  toolbar: {
+    margin: 2,
+    backgroundColor: "#FAFAFF",
+    borderRadius: "10px",
+    py: 1,
+    boxShadow: "1px 1px 1px 1px #DADDD8",
+  },
+  button: {
+    backgroundColor: "#00a6fb",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#00a6fb",
+      transform: "scale(1.05)",
+    },
   },
 };
 
-export default function Appbar() {
+const Appbar = () => {
   const { provider, login, logout, getUserInfo } = useWeb3Auth();
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    if (provider) {
-      getUserInfo().then((res) => {
+    const fetchData = async () => {
+      if (provider) {
+        const res = await getUserInfo();
         setUserInfo(res);
         console.log(res);
-      });
-    }
+      }
+    };
+
+    fetchData();
   }, [provider, getUserInfo]);
 
   const handleLogin = async () => {
     login();
   };
+
   const handleLogout = async () => {
     logout();
     setUserInfo(null);
@@ -40,26 +54,9 @@ export default function Appbar() {
   };
 
   return (
-    <Grid sx={{ display: "flex" }}>
-      <AppBar
-        component="nav"
-        position="fixed"
-        sx={{
-          backgroundColor: "transparent",
-          height: "180px",
-          boxShadow: "none",
-        }}
-      >
-        <Toolbar
-          sx={{
-            m: 2,
-            backgroundColor: "#FAFAFF",
-            borderRadius: "10px",
-            py: 1,
-            boxShadow: "1px 1px 1px 1px #DADDD8",
-          }}
-        >
-          {/* ------------ Desktop -------------- */}
+    <Grid container sx={{ display: "flex" }}>
+      <AppBar component="nav" position="fixed" sx={styles.appBar}>
+        <Toolbar sx={styles.toolbar}>
           <Grid
             container
             sx={{
@@ -68,26 +65,24 @@ export default function Appbar() {
               display: { xs: "none", sm: "none", md: "flex" },
             }}
           >
-            <>
-              <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                Erupi
-              </Link>
-            </>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <img src={logo} alt="logo" width="100px" />
+            </Link>
 
             {!provider ? (
               <ButtonGroup variant="text">
-                <Button sx={btn} onClick={handleLogin}>
+                <Button sx={styles.button} onClick={handleLogin}>
                   Login
                 </Button>
               </ButtonGroup>
             ) : (
-              <ButtonGroup variant="text">
-                <Button sx={btn} onClick={handleLogout}>
+              <ButtonGroup>
+                <Button sx={styles.button} onClick={handleLogout}>
                   Logout
                 </Button>
 
                 <Link to="/profile" style={{ textDecoration: "none" }}>
-                  {userInfo && userInfo.name && (
+                  {userInfo?.name && (
                     <img
                       src={userInfo.profileImage}
                       alt="profile"
@@ -95,6 +90,7 @@ export default function Appbar() {
                         width: "50px",
                         height: "50px",
                         borderRadius: "50%",
+                        marginLeft: "10px",
                       }}
                     />
                   )}
@@ -106,4 +102,6 @@ export default function Appbar() {
       </AppBar>
     </Grid>
   );
-}
+};
+
+export default Appbar;
