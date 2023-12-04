@@ -2,15 +2,38 @@ import { useWeb3Auth } from "../services/web3auth";
 import { useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import Bg from "../Assets/e-RUPI.jpg";
+import Cards from "../components/cards";
+
+const vouchers = [
+  {
+    id: 1,
+    name: "Redeem Voucher",
+    description: "3",
+    image: "https://cdn.dribbble.com/users/891507/screenshots/5706046/sale.gif",
+  },
+  {
+    id: 2,
+    name: "Active Voucher",
+    description: "2",
+    image:
+      "https://i.pinimg.com/originals/0e/ed/cf/0eedcf1f924423380eb97e32fe34685d.gif",
+  },
+  {
+    id: 3,
+    name: "Expired Voucher",
+    description: "1",
+    image: "https://lordicon.com/icons/wired/lineal/759-ticket-coupon.gif",
+  },
+];
 
 const Home = () => {
-  const { getUserInfo } = useWeb3Auth();
-  const [userInfo, setUserInfo] = useState(null);
+  // const { getUserInfo } = useWeb3Auth();
+  // const [userInfo, setUserInfo] = useState(null);
 
-  const fetchData = async () => {
-    const info = await getUserInfo();
-    setUserInfo(info);
-  };
+  // const fetchData = async () => {
+  //   const info = await getUserInfo();
+  //   setUserInfo(info);
+  // };
 
   return (
     <div>
@@ -66,6 +89,39 @@ const Home = () => {
             voucher is relatively faster and at the same time reliable, as the
             required amount is already stored in the voucher.
           </Typography>
+        </Grid>
+
+        {/* ------------------------------------------------------------------ */}
+
+        <Grid item xs={10}>
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              color: "#2E3B55",
+              marginTop: "20px",
+              marginBottom: "20px",
+            }}
+          >
+            Explore Vouchers
+          </Typography>
+
+          {/* <hr
+            style={{
+              backgroundColor: "#edede9",
+            }}
+          /> */}
+
+          <Grid container sx={{ justifyContent: "center" }}>
+            {vouchers.map((voucher) => (
+              <Cards
+                number={voucher.id}
+                name={voucher.name}
+                description={voucher.description}
+                image={voucher.image}
+              />
+            ))}
+          </Grid>
         </Grid>
       </Grid>
     </div>

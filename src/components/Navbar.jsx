@@ -3,6 +3,8 @@ import { AppBar, Toolbar, Button, ButtonGroup, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useWeb3Auth } from "../services/web3auth";
 import logo from "../Assets/logo.png";
+import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
+import Avatar from "@mui/material/Avatar";
 
 const styles = {
   appBar: {
@@ -18,12 +20,17 @@ const styles = {
     boxShadow: "1px 1px 1px 1px #DADDD8",
   },
   button: {
-    backgroundColor: "#00a6fb",
-    color: "white",
+    color: "#00a6fb",
+    margin: "10px",
     "&:hover": {
-      backgroundColor: "#00a6fb",
       transform: "scale(1.05)",
     },
+  },
+  logout_buttons: {
+    height: 40,
+    width: 110,
+    margin: "5px",
+    fontSize: 12,
   },
 };
 
@@ -76,25 +83,30 @@ const Appbar = () => {
                 </Button>
               </ButtonGroup>
             ) : (
-              <ButtonGroup>
-                <Button sx={styles.button} onClick={handleLogout}>
+              <ButtonGroup variant="contained" sx={{ mt: 1 }}>
+                <Button sx={styles.logout_buttons} onClick={handleLogout}>
                   Logout
                 </Button>
 
-                <Link to="/profile" style={{ textDecoration: "none" }}>
-                  {userInfo?.name && (
-                    <img
-                      src={userInfo.profileImage}
-                      alt="profile"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                        marginLeft: "10px",
-                      }}
-                    />
-                  )}
-                </Link>
+                <Button
+                  href="/profile"
+                  sx={{
+                    fontFamily: "Josefin Sans, sans-serif",
+                    backgroundColor: "transparent",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={userInfo?.profilePic}
+                    sx={{
+                      width: 40,
+                      height: 40,
+                    }}
+                  />
+                </Button>
               </ButtonGroup>
             )}
           </Grid>
