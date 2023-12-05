@@ -2,10 +2,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button } from "@mui/material";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 
 export default function Cards(props) {
-  const { name, description, image, number } = props;
+  const { name, image, number } = props;
 
   return (
     <Card
@@ -21,42 +22,42 @@ export default function Cards(props) {
         justifyContent: "space-between",
       }}
     >
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          image={image}
-          alt="vouchers"
+      <CardMedia
+        component="img"
+        image={image}
+        alt="vouchers"
+        sx={{
+          width: "100%",
+          height: "200px",
+          objectFit: "cover",
+          objectPosition: "center",
+        }}
+      />
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography
           sx={{
-            width: "100%",
-            height: "200px",
-            objectFit: "cover",
-            objectPosition: "center",
+            fontWeight: "bold",
+            color: "#2E3B55",
           }}
-        />
-        <CardContent>
-          <Typography
+          variant="h5"
+          component="div"
+        >
+          {name}
+        </Typography>
+        <Button href="/vouchers" size="small" color="primary">
+          <ArrowCircleRightIcon
             sx={{
-              fontWeight: "bold",
-              color: "#2E3B55",
-              marginTop: "20px",
-              marginBottom: "20px",
+              color: "#e76f51",
             }}
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            {name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          View
+          />
         </Button>
-      </CardActions>
+      </CardContent>
     </Card>
   );
 }

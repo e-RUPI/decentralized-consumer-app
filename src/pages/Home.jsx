@@ -1,6 +1,13 @@
-import { useWeb3Auth } from "../services/web3auth";
-import { useState } from "react";
-import { Grid, Typography } from "@mui/material";
+// import { useWeb3Auth } from "../services/web3auth";
+import {
+  Grid,
+  Typography,
+  AppBar,
+  Toolbar,
+  Card,
+  CardContent,
+  Button,
+} from "@mui/material";
 import Bg from "../Assets/e-RUPI.jpg";
 import Cards from "../components/cards";
 
@@ -36,95 +43,163 @@ const Home = () => {
   // };
 
   return (
-    <div>
+    <Grid
+      container
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+
+        py: "20px",
+      }}
+    >
+      {/* ------------------ e-RUPI -------------------------------------------- */}
       <Grid
-        container
+        item
+        xs={10}
+        minHeight="100vh"
         sx={{
+          display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
         }}
       >
-        <Grid item xs={10} sx={{ textAlign: "center" }}>
-          <img
-            src={Bg}
-            alt="e-RUPI"
-            style={{ width: "100%", height: "100%" }}
-          />
-        </Grid>
+        <AppBar position="static" sx={{ my: "20px" }}>
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              e-RUPI
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <img src={Bg} alt="e-RUPI" style={{ width: "100%", height: "100%" }} />
 
-        <Grid item xs={10}>
-          {/* <Typography
-            variant="h4"
-            sx={{
-              fontWeight: "bold",
-              color: "#2E3B55",
-              marginTop: "20px",
-              marginBottom: "20px",
-            }}
-          >
-            e-RUPI - Digital Payment Solution
-          </Typography> */}
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            my: "20px",
+          }}
+        >
+          What is <span style={{ color: "#fb5607" }}>e-RUPI</span>?
+        </Typography>
 
-          <Typography
-            variant="body2"
-            sx={{
-              color: "#2E3B55",
-              marginTop: "20px",
-              marginBottom: "20px",
-            }}
-          >
-            e-RUPI is a digital solution launched by the Hon'ble PM via video
-            conferencing to allow cashless payment solution for COVID-19
-            vaccination. The digital payment solution has been developed with
-            the support of DFS (Department of Financial Services) and NHA
-            (National Health Authority) and is powered by National Payments
-            Corporation of India (NPCI). This seamless one-time payment
-            mechanism enables users to redeem the voucher without a card,
-            digital payments app or internet banking access, at the merchants
-            accepting UPI e-Prepaid Vouchers. The e-RUPI would be shared with
-            the beneficiaries for a specific purpose or activity by
-            organizations via SMS or QR code. This contactless e-RUPI is easy,
-            safe and secure as it keeps the details of the beneficiaries
-            completely confidential. The entire transaction process through this
-            voucher is relatively faster and at the same time reliable, as the
-            required amount is already stored in the voucher.
-          </Typography>
-        </Grid>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#2E3B55",
+          }}
+        >
+          e-RUPI is a digital solution launched by the Hon'ble PM via video
+          conferencing to allow cashless payment solution for COVID-19
+          vaccination. The digital payment solution has been developed with the
+          support of DFS (Department of Financial Services) and NHA (National
+          Health Authority) and is powered by National Payments Corporation of
+          India (NPCI). This seamless one-time payment mechanism enables users
+          to redeem the voucher without a card, digital payments app or internet
+          banking access, at the merchants accepting UPI e-Prepaid Vouchers. The
+          e-RUPI would be shared with the beneficiaries for a specific purpose
+          or activity by organizations via SMS or QR code. This contactless
+          e-RUPI is easy, safe and secure as it keeps the details of the
+          beneficiaries completely confidential. The entire transaction process
+          through this voucher is relatively faster and at the same time
+          reliable, as the required amount is already stored in the voucher.
+        </Typography>
+      </Grid>
 
-        {/* ------------------------------------------------------------------ */}
+      {/* ----------------- Vouchers ------------------------------------------------- */}
 
-        <Grid item xs={10}>
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: "bold",
-              color: "#2E3B55",
-              marginTop: "20px",
-              marginBottom: "20px",
-            }}
-          >
-            Explore Vouchers
-          </Typography>
+      <Grid
+        item
+        xs={10}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "70vh",
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            color: "#2E3B55",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
+          Explore Vouchers
+        </Typography>
 
-          {/* <hr
-            style={{
-              backgroundColor: "#edede9",
-            }}
-          /> */}
-
-          <Grid container sx={{ justifyContent: "center" }}>
-            {vouchers.map((voucher) => (
-              <Cards
-                number={voucher.id}
-                name={voucher.name}
-                description={voucher.description}
-                image={voucher.image}
-              />
-            ))}
-          </Grid>
+        <Grid container sx={{ justifyContent: "center" }}>
+          {vouchers.map((voucher) => (
+            <Cards
+              number={voucher.id}
+              name={voucher.name}
+              description={voucher.description}
+              image={voucher.image}
+            />
+          ))}
         </Grid>
       </Grid>
-    </div>
+
+      {/* -------------------- Schemes ---------------------------------------------- */}
+
+      <Grid
+        item
+        xs={10}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "70vh",
+        }}
+      >
+        <Grid
+          container
+          sx={{
+            my: "20px",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              color: "#2E3B55",
+            }}
+          >
+            Explore Schemes
+          </Typography>
+
+          <Button href="/schemes" variant="text">
+            Explore
+          </Button>
+        </Grid>
+
+        <Card sx={{ display: "flex" }}>
+          <CardContent sx={{ flex: "1 0 auto" }}>
+            <Typography variant="h5">
+              Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              component="div"
+            >
+              Ministry of Agriculture and Farmers' Welfare
+            </Typography>
+
+            <Typography
+              sx={{
+                fontSize: "20px",
+                alignSelf: "center",
+                m: "auto",
+              }}
+            >
+              <br />
+              <a href="https://pmkisan.gov.in/">Read More</a>
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 
