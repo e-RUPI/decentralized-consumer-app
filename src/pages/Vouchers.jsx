@@ -7,11 +7,30 @@ import {
   Divider,
   CardActions,
   CardHeader,
+  Button,
+  Box,
+  Modal,
 } from "@mui/material";
 import axios from "axios";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "20px",
+};
+
 const Vouchers = () => {
   const [vouchersData, setVouchersData] = useState([]);
+  const [modalData, setModalData] = useState({});
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,10 +158,58 @@ const Vouchers = () => {
                 sx={{
                   justifyContent: "center",
                 }}
-              ></CardActions>
+              >
+                {voucher.status === "Active" ? (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#2E3B55",
+                      color: "#ffffff",
+                      fontWeight: "bold",
+                    }}
+                    // pass voucher data to modal
+                    onClick={() => {
+                      handleOpen();
+                      setModalData(voucher);
+                    }}
+                  >
+                    Redeem
+                  </Button>
+                ) : null}
+              </CardActions>
             </Card>
           ))}
         </Grid>
+
+        <Modal
+          open={open}
+          onClose={handleClose}
+          sx={{
+            backdropFilter: "blur(1px)",
+          }}
+        >
+          <Box sx={style}>
+            <Typography
+              component="h2"
+              sx={{
+                fontWeight: "bold",
+                color: "#2E3B55",
+              }}
+            >
+              {modalData.purpose}
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {modalData.maxAmount} INR <br />
+              Status : {modalData.status} <br />
+              Expiry : {modalData.expiry.slice(0, 10)} <br />
+              Redeemable at : {modalData.mcc} <br />
+            </Typography>
+
+            <Button variant="contained" sx={{ mt: "20px" }}>
+              Redeem
+            </Button>
+          </Box>
+        </Modal>
       </Grid>
     </Grid>
   );
