@@ -201,7 +201,7 @@ const Vouchers = () => {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {modalData.maxAmount} INR <br />
               Status : {modalData.status} <br />
-              Expiry : {modalData.expiry.slice(0, 10)} <br />
+              Expiry : {modalData.expiry} <br />
               Redeemable at : {modalData.mcc} <br />
             </Typography>
 
