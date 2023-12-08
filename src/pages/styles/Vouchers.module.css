@@ -1,0 +1,46 @@
+/* Vouchers.module.css */
+
+.voucherCard {
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cardHeader {
+    font-weight: bold;
+    color: #2e3b55;
+    height: 60px;
+  }
+  
+  .cardContent {
+    height: 100%;
+  }
+  
+  .status {
+    color: red;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .valueText {
+    font-size: 12px;
+    color: #2e3b55;
+    font-weight: bold;
+  }
+  
+  .activeButton {
+    background-color: #2e3b55;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .disabledButton {
+    background-color: #808080;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  

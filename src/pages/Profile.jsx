@@ -1,6 +1,6 @@
 import { useWeb3Auth } from "../services/web3auth";
 import { useState, useEffect } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 
 const Profile = () => {
   const { provider, getUserInfo } = useWeb3Auth();
@@ -16,26 +16,26 @@ const Profile = () => {
   }, [provider, getUserInfo]);
 
   return (
-    <div>
-      <Grid container sx={{ mt: "200px" }}>
-        <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h2">Profile</Typography>
-
-          {userInfo && (
-            <div>
-              <img
-                src={userInfo.profileImage}
-                alt="profile"
-                style={{ width: "200px", height: "200px", borderRadius: "50%" }}
-              />
-              <Typography variant="h4">Name: {userInfo.name}</Typography>
-              <Typography variant="h4">Email: {userInfo.email}</Typography>
-              <Typography variant="h4">Address: {userInfo.address}</Typography>
-            </div>
-          )}
-        </Grid>
+    <Grid
+      container
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
+      <Grid item xs={10}>
+        <Typography variant="h4">Profile</Typography>
+        <Divider sx={{ mt: "20px", mb: "20px" }} />
+        {/* // display all fields from userInfo by mapping key value*/}
+        {userInfo &&
+          Object.keys(userInfo).map((key) => (
+            <Typography key={key} >
+              {key}: {userInfo[key]}
+            </Typography>
+          ))}
       </Grid>
-    </div>
+    </Grid>
   );
 };
 

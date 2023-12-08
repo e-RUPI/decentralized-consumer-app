@@ -148,7 +148,7 @@ const Home = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          minHeight: "70vh",
+          minHeight: "50vh",
         }}
       >
         <Grid

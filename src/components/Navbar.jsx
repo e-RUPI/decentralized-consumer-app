@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, ButtonGroup, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useWeb3Auth } from "../services/web3auth";
 import logo from "../Assets/logo.png";
-import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
-import Avatar from "@mui/material/Avatar";
 
 const styles = {
   appBar: {
@@ -35,20 +32,7 @@ const styles = {
 };
 
 const Appbar = () => {
-  const { provider, login, logout, getUserInfo } = useWeb3Auth();
-  const [userInfo, setUserInfo] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (provider) {
-        const res = await getUserInfo();
-        setUserInfo(res);
-        console.log(res);
-      }
-    };
-
-    fetchData();
-  }, [provider, getUserInfo]);
+  const { provider, login, logout } = useWeb3Auth();
 
   const handleLogin = async () => {
     login();
@@ -56,7 +40,6 @@ const Appbar = () => {
 
   const handleLogout = async () => {
     logout();
-    setUserInfo(null);
     window.location.reload();
   };
 
@@ -88,24 +71,8 @@ const Appbar = () => {
                   Logout
                 </Button>
 
-                <Button
-                  href="/profile"
-                  sx={{
-                    fontFamily: "Josefin Sans, sans-serif",
-                    backgroundColor: "transparent",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                    },
-                  }}
-                >
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={userInfo?.profilePic}
-                    sx={{
-                      width: 40,
-                      height: 40,
-                    }}
-                  />
+                <Button sx={styles.logout_buttons} href="/profile">
+                  Profile
                 </Button>
               </ButtonGroup>
             )}

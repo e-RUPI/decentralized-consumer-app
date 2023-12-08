@@ -1,11 +1,5 @@
 export const agricultureContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const healthContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const educationContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const foodContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const travelContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const waterContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const transportContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
-export const housingContract = "0x5d4442DB47a53adF3dC41b8988ec5cDa6764a42D";
+export const educationContract = "0x2C00F6DD3cC4F7C0dCA21D63CA0d1A8D8dAd7646";
 
 export const NFTAbi = [
   {

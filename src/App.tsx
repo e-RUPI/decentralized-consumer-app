@@ -7,6 +7,7 @@ import { Grid } from "@mui/material";
 import Footer from "./components/footer";
 import Vouchers from "./pages/Vouchers";
 import Schemes from "./pages/Schemes";
+import RedeemCouponPage from "./pages/Redeem";
 import { Web3AuthProvider } from "./services/web3auth";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/vouchers" element={<Vouchers />} />
           <Route path="/schemes" element={<Schemes />} />
+          <Route path="/redeem" element={<RedeemCouponPage />} />
         </Routes>
         <Footer />
       </Web3AuthProvider>

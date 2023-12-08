@@ -1,0 +1,34 @@
+  // const [coupons, setCoupons] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:7070/vouchers");
+  //       setVouchersData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+   // const contract = new ethers.Contract(contractAddress, contractAbi,);
+
+        // const totalCoupons = await contract.totalSupply();
+        // const couponList = [];
+
+        // for (let i = 0; i < totalCoupons; i++) {
+        //     const coupon = await contract.coupons(i);
+        //     const metadataURL = coupon.tokenUri;
+        //     // const NFTURI = await axios.get(`https://nftstorage.link/ipfs/${metadataURL.slice(7)}`);
+
+        //     const NFTURI = await fetch(convertIpfsUrl(metadataURL))
+
+
+  // description: "This coupon can be redeemed to get Fertilizer from the registered merchants!";
+  // expiry: "1700300693";
+  // image: "https://bafybeicbtbtk4vsppbpdmmvz4pcu6cuy5gque7nso6nnlq2pejbqackvii.ipfs.nftstorage.link/image.jpg";
+  // name: "Fertilizers Coupon";
+  // owner: "0x9599962d6297946133da31a4C21d8DEAAfE38474";
+  // tokenId: "0";
+  // value: "2000";
