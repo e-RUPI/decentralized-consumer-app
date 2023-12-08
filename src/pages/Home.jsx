@@ -55,7 +55,7 @@ const Home = () => {
       {/* ------------------ e-RUPI -------------------------------------------- */}
       <Grid
         item
-        xs={10}
+        xs={9}
         minHeight="100vh"
         sx={{
           display: "flex",
@@ -65,8 +65,16 @@ const Home = () => {
       >
         <AppBar position="static" sx={{ my: "20px" }}>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              e-RUPI
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                // italics
+                fontStyle: "italic",
+              }}
+            >
+              A cashless and contactless instrument for digital payment
             </Typography>
           </Toolbar>
         </AppBar>
@@ -88,20 +96,20 @@ const Home = () => {
             color: "#2E3B55",
           }}
         >
-          e-RUPI is a digital solution launched by the Hon'ble PM via video
-          conferencing to allow cashless payment solution for COVID-19
-          vaccination. The digital payment solution has been developed with the
-          support of DFS (Department of Financial Services) and NHA (National
-          Health Authority) and is powered by National Payments Corporation of
-          India (NPCI). This seamless one-time payment mechanism enables users
-          to redeem the voucher without a card, digital payments app or internet
-          banking access, at the merchants accepting UPI e-Prepaid Vouchers. The
-          e-RUPI would be shared with the beneficiaries for a specific purpose
-          or activity by organizations via SMS or QR code. This contactless
-          e-RUPI is easy, safe and secure as it keeps the details of the
-          beneficiaries completely confidential. The entire transaction process
-          through this voucher is relatively faster and at the same time
-          reliable, as the required amount is already stored in the voucher.
+          e-RUPI is basically a digital voucher which a beneficiary gets on his
+          phone in the form of an SMS or QR code. It is a pre-paid voucher,
+          which he/she can go and redeem it at any centre that accepts its. For
+          example, if the Government wants to cover a particular treatment of an
+          employee in a specified hospital, it can issue an e-RUPI voucher for
+          the determined amount through a partner bank.
+          <br />
+          <br />
+          The employee will receive an SMS or a QR Code on his feature phone /
+          smart phone. He/she can go to the specified hospital, avail of the
+          services and pay through the e-RUPI voucher received on his phone.
+          Thus e-RUPI is a one time contactless, cashless voucher-based mode of
+          payment that helps users redeem the voucher without a card, digital
+          payments app, or internet banking access.
         </Typography>
       </Grid>
 
@@ -109,7 +117,7 @@ const Home = () => {
 
       <Grid
         item
-        xs={10}
+        xs={9}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -122,7 +130,7 @@ const Home = () => {
             fontWeight: "bold",
             color: "#2E3B55",
             marginTop: "20px",
-            marginBottom: "20px",
+            marginBottom: "50px",
           }}
         >
           Explore Vouchers
@@ -144,7 +152,7 @@ const Home = () => {
 
       <Grid
         item
-        xs={10}
+        xs={9}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -163,6 +171,7 @@ const Home = () => {
             sx={{
               fontWeight: "bold",
               color: "#2E3B55",
+              marginBottom: "50px",
             }}
           >
             Explore Schemes

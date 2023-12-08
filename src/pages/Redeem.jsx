@@ -7,10 +7,14 @@ import {
   Button,
   Snackbar,
   Alert,
+  MenuItem,
+  Select,
+  FormLabel,
 } from "@mui/material";
 
 import { agricultureContract, NFTAbi } from "../constants/data";
 import { ethers } from "ethers";
+import { Label } from "@mui/icons-material";
 
 const contractAddress = agricultureContract;
 const contractAbi = NFTAbi;
@@ -25,13 +29,12 @@ const containerStyles = {
 const formContainerStyles = {
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+
   padding: 5,
 };
 
 const textFieldStyles = {
-  margin: 1,
+  margin: "8px",
 };
 
 const buttonStyles = {
@@ -50,6 +53,13 @@ const RedeemCouponPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+
+  const Merchants = [
+    {
+      name: "Fertile Fields",
+      address: "0xB78721b29c028B16ab25f4a2adE1d25fbf8B2d74",
+    },
+  ];
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -110,16 +120,22 @@ const RedeemCouponPage = () => {
           required
           sx={textFieldStyles}
         /> */}
-        <TextField
-          name="merchantAddress"
-          value={merchantAddress}
+
+        <FormLabel component="legend">Select Merchant</FormLabel>
+        <Select
+          name="merchant"
           fullWidth
-          label="Merchant Address"
-          placeholder="Enter Merchant Address"
+          placeholder="Select Merchant"
+          value={merchantAddress}
           onChange={(e) => setMerchantAddress(e.target.value)}
           required
           sx={textFieldStyles}
-        />
+        >
+          {Merchants.map((merchant) => (
+            <MenuItem value={merchant.address}>{merchant.name}</MenuItem>
+          ))}
+        </Select>
+
         <TextField
           name="redeemAmount"
           value={redeemAmount}

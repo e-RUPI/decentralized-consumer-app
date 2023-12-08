@@ -6,11 +6,11 @@ import {
   CardContent,
   Divider,
   CardActions,
-  CardHeader,
   Button,
 } from "@mui/material";
 import Web3 from "web3";
 import { agricultureContract, NFTAbi } from "../constants/data";
+import ChipsArray from "../components/chips";
 
 const contractAddress = agricultureContract;
 const contractAbi = NFTAbi;
@@ -65,6 +65,7 @@ const Vouchers = () => {
             expiry: coupon.expiry.toString(),
             owner: coupon.owner,
             name: nftDetails.name,
+            mcc: nftDetails.mcc,
             description: nftDetails.description,
             status: couponStatus,
             image: convertIpfsUrlIntoImage(nftDetails.image),
@@ -83,14 +84,25 @@ const Vouchers = () => {
   return (
     <Grid
       container
-      minHeight="100vh"
+      marginTop="70px"
+      minHeight="90vh"
       justifyContent="center"
       alignItems="center"
     >
-      <Grid item xs={10}>
-        <Grid item xs={12}>
-          <Typography variant="h4">Vouchers</Typography>
-        </Grid>
+      <Grid item xs={8}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+          }}
+        >
+          Vouchers
+        </Typography>
+        <Typography sx={{ fontSize: "15px" }}>
+          Redeem your vouchers here
+        </Typography>
+
+        <ChipsArray />
 
         <Divider sx={{ mt: "20px", mb: "20px" }} />
         <Grid
@@ -98,9 +110,7 @@ const Vouchers = () => {
           sx={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "space-around",
             alignItems: "center",
-            alignContent: "center",
           }}
         >
           {couponData.map((voucher, index) => (
@@ -108,35 +118,48 @@ const Vouchers = () => {
               key={index}
               sx={{
                 width: "250px",
-                height: "250px",
-                p: "10px",
+                height: "auto",
                 margin: "20px",
+                boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+                borderRadius: "10px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                backgroundColor: "#f5f5f5",
+                justifyContent: "space-between",
+
+                "&:hover": {
+                  boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.2)",
+                },
               }}
             >
-              <CardHeader title={voucher.name} />
-
               <CardContent>
+                <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                  {voucher.name}
+                </Typography>
+
+                <Divider sx={{ mt: "10px", mb: "10px" }} />
                 {voucher.status === "Active" ? (
-                  <Typography sx={{ fontSize: "12px", color: "#2E3B55" }}>
-                    Expires on {voucher.expiry.slice(0, 10)}
-                  </Typography>
-                ) : voucher.status === "Redeemed" ? (
-                  <Typography sx={{ fontSize: "12px", color: "#2E3B55" }}>
-                    Redeemed on {voucher.redemptionDate.slice(0, 10)}
+                  <Typography sx={{ fontSize: "15px" }}>
+                    Expires on {new Date(voucher.expiry * 1000).toDateString()}
                   </Typography>
                 ) : (
-                  <Typography sx={{ fontSize: "12px", color: "#2E3B55" }}>
+                  <Typography sx={{ fontSize: "15px" }}>
                     Expired on {new Date(voucher.expiry * 1000).toDateString()}
                   </Typography>
                 )}
-
                 <Typography>
                   {voucher.value} INR <br />{" "}
                 </Typography>
+
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    color: "#2E3B55",
+                    height: "50px",
+                  }}
+                >
+                  {voucher.description}
+                </Typography>
+
                 <Typography
                   sx={{
                     // red for expired vouchers, blue for redeemed, green for active
@@ -155,25 +178,26 @@ const Vouchers = () => {
                 >
                   {voucher.status}
                 </Typography>
-
-                {voucher.status === "Active" ? (
-                  <CardActions>
-                    {/* // pass the tokenId as a query parameter to the redeem page */}
+                <CardActions
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {voucher.status === "Active" ? (
                     <Button
                       size="small"
-                      variant="contained"
                       href={`/redeem?tokenId=${voucher.tokenId}`}
                     >
+                      Redeem Now
+                    </Button>
+                  ) : (
+                    <Button size="small" disabled>
                       Redeem
                     </Button>
-                  </CardActions>
-                ) : (
-                  <CardActions>
-                    <Button size="small" variant="contained" disabled>
-                      Redeem
-                    </Button>
-                  </CardActions>
-                )}
+                  )}
+                </CardActions>
               </CardContent>
             </Card>
           ))}

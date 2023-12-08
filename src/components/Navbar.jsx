@@ -6,24 +6,18 @@ import logo from "../Assets/logo.png";
 const styles = {
   appBar: {
     backgroundColor: "transparent",
-    height: "180px",
-    boxShadow: "none",
   },
   toolbar: {
-    margin: 2,
     backgroundColor: "#FAFAFF",
     borderRadius: "10px",
     py: 1,
     boxShadow: "1px 1px 1px 1px #DADDD8",
   },
-  button: {
+
+  buttons: {
+    backgroundColor: "#FAFAFF",
     color: "#00a6fb",
-    margin: "10px",
-    "&:hover": {
-      transform: "scale(1.05)",
-    },
-  },
-  logout_buttons: {
+    borderRadius: "5px",
     height: 40,
     width: 110,
     margin: "5px",
@@ -40,6 +34,7 @@ const Appbar = () => {
 
   const handleLogout = async () => {
     logout();
+    
     window.location.reload();
   };
 
@@ -52,7 +47,6 @@ const Appbar = () => {
             sx={{
               alignItems: "center",
               justifyContent: "space-between",
-              display: { xs: "none", sm: "none", md: "flex" },
             }}
           >
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -61,17 +55,22 @@ const Appbar = () => {
 
             {!provider ? (
               <ButtonGroup variant="text">
-                <Button sx={styles.button} onClick={handleLogin}>
+                <Button sx={styles.buttons} onClick={handleLogin}>
                   Login
                 </Button>
               </ButtonGroup>
             ) : (
-              <ButtonGroup variant="contained" sx={{ mt: 1 }}>
-                <Button sx={styles.logout_buttons} onClick={handleLogout}>
+              <ButtonGroup variant="text">
+                <Button sx={styles.buttons} onClick={handleLogout}>
                   Logout
                 </Button>
-
-                <Button sx={styles.logout_buttons} href="/profile">
+                <Button sx={styles.buttons} href="/vouchers">
+                  Vouchers
+                </Button>
+                <Button sx={styles.buttons} href="/schemes">
+                  Schemes
+                </Button>
+                <Button sx={styles.buttons} href="/profile">
                   Profile
                 </Button>
               </ButtonGroup>
