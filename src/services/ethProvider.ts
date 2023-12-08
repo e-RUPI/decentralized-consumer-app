@@ -127,6 +127,25 @@ const ethProvider = (
       uiConsole("error", error);
     }
   };
+  const getContract = async (abi: any, address: any) => {
+    try {
+      const web3 = new Web3(provider as any);
+      // const accounts = await web3.eth.getAccounts();
+      const contract = new web3.eth.Contract(
+        abi,
+        address
+        // { dataInputFill: "data" }
+      );
+      return contract;
+      // const txRes = await contract.methods
+      //   .update(`Hello world ${Math.random().toString(36).substring(1, 5)}`)
+      //   .send({ from: accounts[0] });
+      // uiConsole("txRes", txRes);
+    } catch (error) {
+      console.log("error", error);
+      uiConsole("error", error);
+    }
+  };
 
   const signTransaction = async () => {
     try {
@@ -153,6 +172,7 @@ const ethProvider = (
     getTokenBalance,
     signAndSendTokenTransaction,
     randomContractInteraction,
+    getContract,
   };
 };
 

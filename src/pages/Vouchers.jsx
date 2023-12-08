@@ -11,7 +11,13 @@ import {
   Box,
   Modal,
 } from "@mui/material";
-import axios from "axios";
+// import axios from "axios";
+import Web3 from "web3";
+import { agricultureContract, NFTAbi } from "../constants/data";
+import { IProvider } from "@web3auth/base";
+
+const contractAddress = agricultureContract;
+const contractAbi = NFTAbi;
 
 const style = {
   position: "absolute",
@@ -32,17 +38,95 @@ const Vouchers = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:7070/vouchers");
+  //       setVouchersData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  function convertIpfsUrl(ipfsUrl) {
+    const hash = ipfsUrl.match(/ipfs:\/\/([a-zA-Z0-9]+)/)[1];
+    return `https://${hash}.ipfs.nftstorage.link/metadata.json`;
+  }
+
+  function convertIpfsUrlIntoImage(ipfsUrl) {
+    const hash = ipfsUrl.match(/ipfs:\/\/([a-zA-Z0-9]+)/)[1];
+    return `https://${hash}.ipfs.nftstorage.link/image.jpg`;
+  }
+
+  // const [coupons, setCoupons] = useState([]);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCoupons = async () => {
       try {
-        const response = await axios.get("http://localhost:7070/vouchers");
-        setVouchersData(response.data);
+        if (typeof window.ethereum === "undefined") {
+          alert("Please install MetaMask first.");
+          return;
+        }
+
+        window.addEventListener("load", async () => {
+          try {
+            await window.ethereum.request({
+              method: "eth_requestAccounts",
+            });
+          } catch (error) { }
+        });
+
+        const web3 = new Web3(window.ethereum);
+        // const contract = new ethers.Contract(contractAddress, contractAbi,);
+
+        // const totalCoupons = await contract.totalSupply();
+        // const couponList = [];
+
+
+        // for (let i = 0; i < totalCoupons; i++) {
+        //     const coupon = await contract.coupons(i);
+        //     const metadataURL = coupon.tokenUri;
+        //     // const NFTURI = await axios.get(`https://nftstorage.link/ipfs/${metadataURL.slice(7)}`);
+        //     const NFTURI = await fetch(convertIpfsUrl(metadataURL))
+        const contract = new web3.eth.Contract(contractAbi, contractAddress);
+
+        const totalCoupons = await contract.methods.totalSupply().call();
+        const couponList = [];
+
+        for (let i = 0; i < totalCoupons; i++) {
+          const coupon = await contract.methods.coupons(i).call();
+          const metadataURL = coupon.tokenUri;
+          // Use fetch for simplicity, you can replace it with your preferred HTTP library
+          const NFTURI = await fetch(convertIpfsUrl(metadataURL));
+
+
+          const nftDetails = await NFTURI.json();
+
+          console.log("NFT DETAILS: ", nftDetails)
+
+          couponList.push({
+            tokenId: coupon.tokenId.toString(),
+            value: coupon.value.toString(),
+            expiry: coupon.expiry.toString(),
+            owner: coupon.owner,
+            name: nftDetails.name,
+            description: nftDetails.description,
+            image: convertIpfsUrlIntoImage(nftDetails.image),
+          });
+        }
+        console.log("COUPON LIST:", couponList)
+        // setCoupons(couponList);
+        setVouchersData(couponList);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching coupons:", error);
       }
     };
-    fetchData();
+
+    fetchCoupons();
   }, []);
+
 
   // createdAt: "2023-12-05T18:59:01.141Z";
   // eRupiId: "QD129312";
@@ -119,8 +203,8 @@ const Vouchers = () => {
                       voucher.status === "Redeemed"
                         ? "#2E3B55"
                         : voucher.status === "Expired"
-                        ? "#da2c38"
-                        : "#4c956c",
+                          ? "#da2c38"
+                          : "#4c956c",
                     color: "#ffffff",
                     borderRadius: "5px",
                     fontSize: "12px",

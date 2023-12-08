@@ -12,6 +12,7 @@ export interface IWalletProvider {
   getTokenBalance?: () => Promise<void>;
   signAndSendTokenTransaction?: () => Promise<void>;
   randomContractInteraction?: () => Promise<void>;
+  getContract?: (abi: any, address: string) => Promise<any>;
 }
 
 export const getWalletProvider = (
